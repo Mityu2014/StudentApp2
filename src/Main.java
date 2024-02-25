@@ -3,9 +3,12 @@
  * @version 2.0
  */
 
-import domen.Student;
-import domen.StudentGroup;
-import domen.StudentSteam;
+import controllers.AccountController;
+import domen.*;
+import services.EmployeeServise;
+import services.StudentServise;
+import services.TeacherService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,22 +43,41 @@ public class Main {
         groups.add(studentGroup3);
         StudentSteam studentSteam = new StudentSteam(1, groups);
         //Вывод групп студентов
-        for (StudentGroup studentGroup : studentSteam) {
-            for (Student student : studentGroup) {
-                System.out.print(studentGroup);
-                System.out.println(student);
-            }
-        }
-        System.out.println("_____________");
-        //Вывод потоков
-        Collections.sort(studentSteam.getSteamList()); //Сортировка потока по количеству студентов в группе и идентификатору группы
-        for (StudentGroup studentGroup : studentSteam) {
-            Collections.sort(studentGroup.getStudentList()); //Сортировка группы по возросту и ID студента
-            for (Student student : studentGroup) {
-                System.out.print(studentSteam);
-                System.out.print(studentGroup);
-                System.out.println(student);
-            }
-        }
+//        for (StudentGroup studentGroup : studentSteam) {
+//            for (Student student : studentGroup) {
+//                System.out.print(studentGroup);
+//                System.out.println(student);
+//            }
+//        }
+//        System.out.println("_____________");
+//        //Вывод потоков
+//        Collections.sort(studentSteam.getSteamList()); //Сортировка потока по количеству студентов в группе и идентификатору группы
+//        for (StudentGroup studentGroup : studentSteam) {
+//            Collections.sort(studentGroup.getStudentList()); //Сортировка группы по возросту и ID студента
+//            for (Student student : studentGroup) {
+//                System.out.print(studentSteam);
+//                System.out.print(studentGroup);
+//                System.out.println(student);
+//            }
+//        }
+        List<Teacher> teacherList  = new ArrayList<>();
+        List<Employee> employeeList  = new ArrayList<>();
+        Employee worker = new Employee("Василий",55,"Разнорабочий");
+        Teacher teacher = new Teacher("Ольга",55, "Доцент");
+        Teacher teacher2 = new Teacher("Игорь",45, "Доктор");
+        Employee worker2 = new Employee("Татьяна",35,"Бухгалтер");
+        Teacher teacher3 = new Teacher("Артур",38, "Кандтдат");
+        employeeList.add(worker);
+        employeeList.add(worker2);
+        teacherList.add(teacher);
+        teacherList.add(teacher2);
+        teacherList.add(teacher3);
+        TeacherService.sortByFIO(teacherList);
+
+        AccountController.paySalery(worker,1000);
+        AccountController.paySalery(teacher,2000);
+        AccountController.averageAge(teacherList);
+        AccountController.averageAge(students1);
+        AccountController.averageAge(employeeList);
     }
 }
